@@ -51,13 +51,18 @@ class HashTable:
 
         Fill this in.
         '''
-        # if self.count == self.capacity:  # if table is at capacity
-        #     self.resize   # call resize function
-        #     return
+        count = 0
+        if count == self.capacity:  # if table is at capacity
+            self.resize   # call resize function
+            return
 
-        #     # shift elements to the right
-        #     for i in range(self.count)
-        
+            # shift elements to the right
+            for i in range(count, len(self.storage)):
+                self.storage[i] = self.storage[i-1]
+
+            # insert our value
+            self.storage[key] = value
+            count += 1
 
     def remove(self, key):
         '''
