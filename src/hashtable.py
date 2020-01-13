@@ -9,7 +9,7 @@ class LinkedPair:
 
 class HashTable:
     '''
-    A hash table that with `capacity` buckets
+    A hash table with `capacity` buckets
     that accepts string keys
     '''
     def __init__(self, capacity):
@@ -51,9 +51,13 @@ class HashTable:
 
         Fill this in.
         '''
-        pass
+        # if self.count == self.capacity:  # if table is at capacity
+        #     self.resize   # call resize function
+        #     return
 
-
+        #     # shift elements to the right
+        #     for i in range(self.count)
+        
 
     def remove(self, key):
         '''
@@ -84,7 +88,12 @@ class HashTable:
 
         Fill this in.
         '''
-        pass
+        count = 0
+        self.capacity *= 2  # double the capacity
+        new_storage = [None] * self.capacity  # define new_storage
+        for i in range(count):  # copy stored elements into new table
+            new_storage[i] = self.storage[i] 
+        self.storage = new_storage  # set new_storage equal to storage
 
 
 
