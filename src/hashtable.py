@@ -94,7 +94,8 @@ class HashTable:
         for i in range(count):  # copy stored elements into new table
             new_storage[i] = self.storage[i] 
         self.storage = new_storage  # set new_storage equal to storage
-
+        return self._hash
+        
 
 
 if __name__ == "__main__":
