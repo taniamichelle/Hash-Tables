@@ -72,7 +72,10 @@ class HashTable:
 
         Fill this in.
         '''
-        pass
+        if self.retrieve() != None:
+            # remove value
+        else:
+            print("Warning: key does not exist")
 
 
     def retrieve(self, key):
