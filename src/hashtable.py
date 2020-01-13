@@ -83,7 +83,12 @@ class HashTable:
 
         Fill this in.
         '''
-        pass
+        count = 0
+        for i in range(count, len(self.storage)):
+            if key:
+                return self.value
+            else:
+                return None
 
 
     def resize(self):
