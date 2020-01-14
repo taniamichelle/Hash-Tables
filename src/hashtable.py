@@ -72,8 +72,8 @@ class HashTable:
 
         Fill this in.
         '''
-        if self.retrieve() != None:
-            # remove value
+        if self.retrieve(key) != None:
+            key.remove(self.value)  # remove value
         else:
             print("Warning: key does not exist")
 
@@ -130,7 +130,7 @@ if __name__ == "__main__":
     ht.resize()
     new_capacity = len(ht.storage)
 
-    print(f"\nResized from {old_capacity} to {new_capacity}.\n")
+    # print(f"\nResized from {old_capacity} to {new_capacity}.\n")
 
     # Test if data intact after resizing
     print(ht.retrieve("line_1"))
