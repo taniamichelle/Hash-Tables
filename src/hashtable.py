@@ -14,13 +14,14 @@ class LinkedPair:
 
 class HashTable:
     '''
-    A hash table with `capacity` buckets
-    that accepts string keys
+    A hash table with `capacity` buckets that accepts string keys.
+    storage: internal array that stores each inserted value in a 
+    `bucket` based on key provided
     '''
     def __init__(self, capacity):
         self.capacity = capacity  #determines the size of our internal array
-        self.storage = [None] * capacity #internal array (stores each inserted value in a “bucket” based on key provided)
-        # linked = LinkedPair()
+        self.storage = [None] * capacity 
+
 
     def _hash(self, key):
         '''
