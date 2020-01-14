@@ -15,7 +15,7 @@ class HashTable:
     def __init__(self, capacity):
         self.capacity = capacity  # Number of buckets in the hash table
         self.storage = [None] * capacity
-
+        linked = LinkedPair()
 
     def _hash(self, key):
         '''
@@ -88,8 +88,8 @@ class HashTable:
         '''
         count = 0
         for i in range(count, len(self.storage)):
-            if key:
-                return self.value
+            if key == linked.key:
+                return linked.value
             else:
                 return None
 
