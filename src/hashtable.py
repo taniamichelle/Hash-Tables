@@ -71,8 +71,9 @@ class HashTable:
         Fill this in.
         '''
         hashed_key = self._hash_mod(key)  # 1) Compute hash
-        if self.storage[hashed_key] is None:
-            print("Warning: key not found")  # if requested node not found
+
+        if self.storage[hashed_key] is None:  # if requested node not found
+            print("Warning: key not found")
         else:
             node = self.storage[hashed_key]
             prev_node = None
@@ -111,10 +112,10 @@ class HashTable:
         hashed_key = self._hash_mod(key)  # 1) Compute hash
         node = self.storage[hashed_key]  # 2) Go to first node in LL at bucket
         while node is not None:  # 3) Traverse LL at this node
-            if node.key != key:
-                node = node.next
-            else:
-                return node.value
+            if node.key != key:  # if current key is NOT target key
+                node = node.next    # iterate to next node
+            else:   # if current key IS target key
+                return node.value   # return the current value
         return None  # If key not found return None
 
     def resize(self):
