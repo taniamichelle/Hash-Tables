@@ -54,13 +54,14 @@ class HashTable:
         Hash collisions should be handled with Linked List Chaining.
         Fill this in.
         '''
-        index = self._hash_mod(key)  # 2) Compute index of key
-        if self.storage[index] is not None:  # 4) Collision
+        hashed_key = self._hash_mod(key)  # 2) Compute index of key
+        if self.storage[hashed_key] is not None:  # 4) Collision
             new_pair = LinkedPair(key, value)
-            new_pair.next = self.storage[index]
-            self.storage[index] = new_pair
+            new_pair.next = self.storage[hashed_key]
+            self.storage[hashed_key] = new_pair
         else:  # 3) If bucket is empty:
-            self.storage[index] = LinkedPair(key, value)  # create & add node
+            self.storage[hashed_key] = LinkedPair(
+                key, value)  # create & add node
             self.size += 1   # 1) Increment size each time insert method is called
 
     def remove(self, key):
@@ -69,11 +70,11 @@ class HashTable:
         Print a warning if the key is not found.
         Fill this in.
         '''
-        index = self._hash_mod(key)  # 1) Compute hash
-        if self.storage[index] is None:
+        hashed_key = self._hash_mod(key)  # 1) Compute hash
+        if self.storage[hashed_key] is None:
             print("Warning: key not found")  # if requested node not found
         else:
-            node = self.storage[index]
+            node = self.storage[hashed_key]
             prev_node = None
             while node:  # while there IS a node, check if curr key matches target key
                 if node.key != key:  # if current key is NOT the target key:
@@ -83,7 +84,7 @@ class HashTable:
                     if node.next is None:  # if Linked pair IS at end of LL
                         if prev_node is None:  # if there is NOT a prev node
                             # point last node to None
-                            self.storage[index] = None
+                            self.storage[hashed_key] = None
                             self.size -= 1  # decrement size
                             return
                         else:  # if there IS a prev node
@@ -92,7 +93,7 @@ class HashTable:
                             return
                     else:  # if Linked pair is NOT at end of LL
                         if prev_node is None:  # if Linked pair is at start of LL
-                            self.storage[index] = node.next
+                            self.storage[hashed_key] = node.next
                             self.size -= 1
                             return
                         else:  # if Linked pair is in middle of LL
@@ -107,8 +108,8 @@ class HashTable:
         Return None if the key is not found.
         Fill this in.
         '''
-        index = self._hash_mod(key)  # 1) Compute hash
-        node = self.storage[index]  # 2) Go to first node in LL at bucket
+        hashed_key = self._hash_mod(key)  # 1) Compute hash
+        node = self.storage[hashed_key]  # 2) Go to first node in LL at bucket
         while node is not None:  # 3) Traverse LL at this node
             if node.key != key:
                 node = node.next
@@ -129,7 +130,7 @@ class HashTable:
             curr_bucket = each_bucket  # create iterator for each bucket
             while curr_bucket:  # while we still have elements in our buckets
                 self.insert(curr_bucket.key, curr_bucket.value)
-                curr_bucket = curr_bucket.next  
+                curr_bucket = curr_bucket.next
 
 
 if __name__ == "__main__":
