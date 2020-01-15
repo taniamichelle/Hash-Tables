@@ -39,7 +39,15 @@ class HashTable:
         Hash an arbitrary key using DJB2 hash
         OPTIONAL STRETCH: Research and implement DJB2
         '''
-        pass
+        # Tico's solution:
+        str_key = str(key)  # Cast the key to a string
+
+        hash_value = 5381  # Start from an arbitrary large prime
+
+        for char in str_key:
+            hash_value = ((hash_value << 5) + hash_value) + ord(char)
+
+        return hash_value
 
     def _hash_mod(self, key):
         '''
@@ -163,3 +171,70 @@ if __name__ == "__main__":
     print(ht.retrieve("line_3"))
 
     print("")
+
+    # def insert(self, key, value):
+    #     '''
+    #     Tico's Solution
+    #     '''
+    #     index = self._hash_mod(key)
+
+    #     current_pair - self.storage[index]
+    #     last_pair = None
+
+    #     while current_pair is not None and current_pair.key != key:
+    #         last_pair = current_pair
+    #         current_pair = last_pair.next
+
+    #     if current_pair is not None:
+    #         current_pair.value = value
+    #     else:
+    #         new_pair = LinkedPair(key, value)
+    #         new_pair.next = self.storage[index]
+    #         self.storage[index] = new_pair
+
+    # def remove(self, key):
+    #     '''
+    #     Tico's Solution
+    #     '''
+    #     index = self._hash_mod(key)
+    #     current_pair - self.storage[index]
+    #     last_pair = None
+
+    #     while current_pair is not None and current_pair.key != key:
+    #         last_pair = current_pair
+    #         current_pair = last_pair.next
+
+    #     if current_pair is None:
+    #         print("ERROR: Unable to remove entry with key" + key)
+    #     else:
+    #         if last_pair is None:  # removing the first element in LL
+    #             self.storage[index] = current_pair.next
+    #         else:
+    #             last_pair.next = current_pair.next
+
+    # def retrieve(self, key):
+    #     '''
+    #     Tico's Solution
+    #     '''
+    #     index = self._hash_mod(key)  # 1) Compute hash
+    #     current_pair = self.storage[index]  # 2) Go to first node in LL at bucket
+    #     while current_pair is not None:  # 3) Traverse LL at this node
+    #         if current_pair.key == key:
+    #             return current_pair.value   # return the current value
+    #         current_pair = current_pair.next    # iterate to next node
+
+    # def resize(self):
+    #     '''
+    #     Tico's Solution
+    #     '''
+    #     old_storage = self.storage
+    #     self.capacity = 2 * self.capacity  # double the capacity
+    #     # create new hashtable/array with the increased capacity
+    #     self.storage = [None] * self.capacity
+    #     current_pair = None
+
+    #     for bucket_item in old_storage:  # for each bucket in new_storage array
+    #         current_pair = bucket_item  # create iterator for each bucket
+    #         while current_pair is not None:  # while we still have elements in our buckets
+    #             self.insert(current_pair.key, current_pair.value)
+    #             current_pair = current_pair.next
