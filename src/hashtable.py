@@ -24,7 +24,7 @@ class HashTable:
 
     def __init__(self, capacity):
         self.capacity = capacity  # determines the size of our internal array
-        self.storage = [None] * capacity
+        self.storage = [None] * capacity  # hash table- array
         self.size = 0  # Number of elements that have been inserted
 
     def _hash(self, key):
@@ -125,9 +125,11 @@ class HashTable:
         Fill this in.
         '''
         self.capacity *= 2  # double the capacity
-        new_storage = self.storage  # create temp storage: new_storage
-        self.storage = [None] * self.capacity  # expanding storage
-        for each_bucket in new_storage:  # for each bucket in new_storage array
+        old_storage = self.storage
+        # create new hashtable/array with the increased capacity
+        self.storage = [None] * self.capacity
+
+        for each_bucket in old_storage:  # for each bucket in new_storage array
             curr_bucket = each_bucket  # create iterator for each bucket
             while curr_bucket:  # while we still have elements in our buckets
                 self.insert(curr_bucket.key, curr_bucket.value)
