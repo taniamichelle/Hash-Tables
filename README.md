@@ -35,7 +35,11 @@ There are many different types of hash functions with different uses (you may ha
 
 ## How are hash table collisions handled?
 
-There are many ways to handle [hash table collisions](https://en.wikipedia.org/wiki/Hash_table#Collision_resolution) but we'll focus on the linked list chaining method.
+There are many ways to handle [hash table collisions](https://en.wikipedia.org/wiki/Hash_table#Collision_resolution) but we'll focus on the linked list chaining method:
+
+-Our hash method needs to take our key,which will be a string of any length, and produce an index for our internal buckets array.
+
+-We will be creating a hash function to convert the string to an index. There are many properties of a good hash function, but for our purposes the most important characteristic for our function to have is uniformity. We want our hash values to be as evenly distributed among our buckets as possible, to take full advantage of each bucket and avoid collisions.
 
 Let's say we have a hash table of size 4 and we are adding 5 elements like so:
 
@@ -63,13 +67,13 @@ Now, let's say our hash function maps the keys like so:
 
 Our array would look something like this:
 
-`0` = `<"a", "aardvark">  ->  NULL`
+`0` = `<"a", "aardvark"> -> NULL`
 
-`1` = `<"b", "bear">  ->  NULL`
+`1` = `<"b", "bear"> -> NULL`
 
-`2` = `<"c", "cat">  ->  <"e", "elephant">  ->  NULL`
+`2` = `<"c", "cat"> -> <"e", "elephant"> -> NULL`
 
-`3` = `<"d", "dog">  ->  NULL`
+`3` = `<"d", "dog"> -> NULL`
 
 Now if we want to find the value stored for "e", we would first find it's hashed index (2), then travel through the linked list until we find the key/value pair with a matching key and return the value.
 
@@ -78,7 +82,6 @@ Note that while searching with a hashed index has time complexity of O(1), searc
 ## How do we prevent performance from degrading when the hash table fills up?
 
 Due to this performance degradation, most languages, such as Python, will automatically resize the hash table when it reaches a certain capacity. This is done by creating a new hash table (usually doubling in size) and copying each element one-by-one into the new hash table.
-
 
 # Assignment
 
@@ -89,6 +92,7 @@ Run your code by typing `python hashtable.py`.
 Run tests by typing `python test_hashtable.py`.
 
 ## STRETCH GOALS
+
 1. Research and implement the DJB2 hashing algorithm.
 
 2. Update your HashTable to automatically double in size when it grows past a load factor of 0.7 and half in size when it shrinks past a load factor of 0.2. This should only occur if the HashTable has been resized past the initial size. Refactor tests to pass with your resizing HashTable.
